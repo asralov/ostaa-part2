@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Ostaa - Add Item</title>
+</head>
+<body id="postBody">
+    <div id="postRoot">
+        <div id="postMainBox">
+            <div id="postTitle">
+                Ostaa
+            </div>
+            <div id="addPostBox">
+                <span>Add a Post!</span>
+                <div id="itemTitleBox">
+                    <span>Title</span>
+                    <input type="text" id="itemTitle">
+                </div>
+                <div id="descItemBox">
+                    <span>Info</span>
+                    <input type="text" id="descItem">
+                </div>
+                <div id="priceItemBox">
+                    <span>Price</span>
+                    <input type="number" id="priceItem" pattern="[0-9]">
+                </div>
+                <div id="statusItemBox">
+                    <span>Status</span>
+                    <input type="text" id="statusItem">
+                </div>
+                <div id="imageItemBox">
+                    <span>Image</span>
+                    <input type="file" id="imageItem" value=" ">
+                </div>
+                <div id="addItemButtonBox">
+                    <button onclick="addItem();" id="addItemButton">
+                        Add Item
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
