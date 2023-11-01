@@ -15,7 +15,7 @@
             </div>
             <div id="formBox">
                 <div id="loginOrCreateTitle">
-                    <h3>Log In</h3>
+                    <h3 id="logTitle">Log In</h3>
                     <div id="userBox">
                         <div id="userName">
                             <span>Username</span>
@@ -25,14 +25,14 @@
                             <span>Password</span>
                             <input type="password" id="password">
                         </div>
-                        <div id="userAddButtonBox">
-                            <button onclick="addUser();" id="userAddButton">
+                        <div id="userLogButtonBox">
+                            <button onclick="loginUser();" id="userLogButton">
                                 Login
                             </button>
                         </div>
                     </div> 
                     <!--The end of the add user section-->
-                    <span>Do not have an account? <a href="#" onclick="getCreateAccPage()" id="createAcc">Sign Up</a></span>
+                    <span id="promt">Do not have an account?<button onclick="getCreateAccPage()" id="createAcc">Sign Up</button></span>
                 </div>
             </div>
         </div>
