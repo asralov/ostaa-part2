@@ -81,3 +81,35 @@ body{
     color: rgb(21, 0, 255);
     cursor: pointer;
 }
+
+#userBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin-bottom: 5%;
+}
+
+#user, #password {
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+    margin-bottom: 15px;
+    font-family: 'Roboto Slab', serif;
+    padding-left: 4%;
+
+}
+
+#userLogButton, #userAddButton{
+    border-radius: 7px 7px 7px 7px;
+    cursor: pointer;
+    transition: 200ms;
+    background-color: #2980b9;
+    color: #fff;
+    border:none;
+}
+
+#userLogButton:hover, #userAddButton:hover{
+    border:none;
+    background-color: #fff;
+    color: #2980b9;
+}
