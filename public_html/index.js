@@ -25,18 +25,26 @@ function getCreateLogPage(){
 }
 
 function loginUser() {
-    let us = document.getElementById('user').value;
-    let pw = document.getElementById('password').value;
-    console.log(us, pw);
+  let us = document.getElementById('user').value;
+  let pw = document.getElementById('password').value;
+  console.log(us, pw);
 }
 function addUser() {
   let us = document.getElementById('user').value;
   let pw = document.getElementById('password').value;
   console.log(us, pw);
-  let p = fetch('/add/user/' + us + '/' + encodeURIComponent(pw));
+  let p = fetch('/add/user/'+us+"/"+encodeURIComponent(pw));
   p.then((response) => {
     return response.text();
   }).then((text) => { 
-    alert(text);
+    document.getElementById("createMessage").innerText = text;
+    if (text == "USER ALREADY EXISTS") {
+      document.getElementById("createMessage").style.color = "Red";
+    } else if (text == "USER SUCCESSFULLY SAVED") {
+      document.getElementById("createMessage").style.color = "Green";
+      setInterval(getCreateLogPage, 3000);
+    }
+  }).catch((err) => {
+    console.log("yiker" + err);
   });
 }
