@@ -25,15 +25,18 @@ function getCreateLogPage(){
 }
 
 function loginUser() {
-    window.alert("haha");
+    let us = document.getElementById('user').value;
+    let pw = document.getElementById('password').value;
+    console.log(us, pw);
 }
 function addUser() {
-  let us = document.getElementById('username').value;
+  let us = document.getElementById('user').value;
   let pw = document.getElementById('password').value;
-//   let p = fetch('/account/create/' + us + '/' + encodeURIComponent(pw));
-//   p.then((response) => {
-//     return response.text();
-//   }).then((text) => { 
-//     alert(text);
-//   });
+  console.log(us, pw);
+  let p = fetch('/add/user/' + us + '/' + encodeURIComponent(pw));
+  p.then((response) => {
+    return response.text();
+  }).then((text) => { 
+    alert(text);
+  });
 }
