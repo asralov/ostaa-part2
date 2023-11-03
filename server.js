@@ -22,6 +22,31 @@ db.on('error', () => { console.log('MongoDB connection error:') });
 // Load public_html using express
 app.use(express.static('public_html'));
 
+// -----------------Sessions Section----------------- //
+let sessions = {};
+
+function addSession(username) {
+  let sid = Math.floor(Math.random() * 1000000000);
+  let now = Date.now();
+  sessions[username] = {id: sid, time: now};
+  return sid;
+}
+
+function removeSessions() {
+  let now = Date.now();
+  let usernames = Object.keys(sessions);
+  for (let i = 0; i < usernames.length; i++) {
+    let last = sessions[usernames[i]].time;
+    //if (last + 120000 < now) {
+    if (last + 60000 * 5 < now) {
+      delete sessions[usernames[i]];
+    }
+  }
+  console.log(sessions);
+}
+
+setInterval(removeSessions, 2000);
+
 // -----------------Schema Section----------------- //
 var Schema = mongoose.Schema;
 
