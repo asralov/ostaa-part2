@@ -23,3 +23,17 @@ function getCreateLogPage(){
     document.getElementById("user").value = "";
     document.getElementById("password").value = "";
 }
+
+function loginUser() {
+    window.alert("haha");
+}
+function addUser() {
+  let us = document.getElementById('username').value;
+  let pw = document.getElementById('password').value;
+//   let p = fetch('/account/create/' + us + '/' + encodeURIComponent(pw));
+//   p.then((response) => {
+//     return response.text();
+//   }).then((text) => { 
+//     alert(text);
+//   });
+}
