@@ -42,7 +42,6 @@ function removeSessions() {
       delete sessions[usernames[i]];
     }
   }
-  console.log(sessions);
 }
 
 setInterval(removeSessions, 2000);
@@ -92,6 +91,21 @@ app.get('/add/user/:user/:pass', (req, res) => {
   })
   
 });
+app.post('/account/login', (req, res) => { 
+  let u = req.body;
+  let p1 = User.find({username: u.username, password: u.password}).exec();
+  p1.then( (results) => { 
+    if (results.length == 0) {
+      res.end('Coult not find account');
+    } else {
+      let sid = addSession(u.username);  
+      res.cookie("login", 
+        {username: u.username, sessionID: sid}, 
+        {maxAge: 60000 * 2 });
+      res.end('SUCCESS');
+    }
+  });
+});
 
 // POST method. Adds a new item to the databse
 app.post('/add/item', (req, res) => {
@@ -122,6 +136,8 @@ app.post('/add/item', (req, res) => {
     res.end("ITEM SAVE ERROR")
   })
 });
+
+
 
 // GET method. Returns the json file containing all the users
 app.get('/get/users', function (req, res) {

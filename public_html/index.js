@@ -25,9 +25,26 @@ function getCreateLogPage(){
 }
 
 function loginUser() {
+  console.log('yes');
   let us = document.getElementById('user').value;
   let pw = document.getElementById('password').value;
-  console.log(us, pw);
+  let data = {username: us, password: pw};
+  let p = fetch( '/account/login/', {
+    method: 'POST', 
+    body: JSON.stringify(data),
+    headers: {"Content-Type": "application/json"}
+  });
+  p.then((response) => {
+    return response.text();
+  }).then((text) => {
+    console.log(text);
+    if (text.startsWith('SUCCESS')) {
+      alert(text);
+      window.location.href = '/app/home.html';
+    } else {
+      alert('failed');
+    }
+  });
 }
 /**
  * This function adds a user to the database. If the username already exists
@@ -56,3 +73,4 @@ function addUser() {
     console.log("yiker" + err);
   });
 }
+
