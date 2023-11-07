@@ -10,6 +10,7 @@
 const mongoose = require('mongoose');
 const bp = require('body-parser')
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = 80;
 
@@ -18,9 +19,6 @@ const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1/ostaaItems';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', () => { console.log('MongoDB connection error:') });
-
-// Load public_html using express
-app.use(express.static('public_html'));
 
 // -----------------Sessions Section----------------- //
 let sessions = {};
@@ -38,13 +36,40 @@ function removeSessions() {
   for (let i = 0; i < usernames.length; i++) {
     let last = sessions[usernames[i]].time;
     //if (last + 120000 < now) {
-    if (last + 60000 * 5 < now) {
+    if (last + 10000 * 5 < now) {
       delete sessions[usernames[i]];
     }
   }
+  console.log(sessions);
 }
 
 setInterval(removeSessions, 2000);
+
+
+app.use(cookieParser());    
+app.use(express.json());
+
+function authenticate(req, res, next) {
+  console.log("yessir");
+  let c = req.cookies;
+  console.log('auth request:');
+  console.log(req.cookies);
+  if (c != undefined) {
+    if (sessions[c.login.username] != undefined && 
+      sessions[c.login.username].id == c.login.sessionID) {
+      next();
+    } else {
+      res.redirect('/index.html');
+    }
+  }  else {
+    res.redirect('/index.html');
+  }
+}
+
+app.use('/app/*', authenticate);
+
+// Load public_html using express
+app.use(express.static('public_html'));
 
 // -----------------Schema Section----------------- //
 var Schema = mongoose.Schema;
