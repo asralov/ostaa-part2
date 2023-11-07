@@ -50,11 +50,11 @@ app.use(cookieParser());
 app.use(express.json());
 
 function authenticate(req, res, next) {
-  console.log("yessir");
   let c = req.cookies;
   console.log('auth request:');
   console.log(req.cookies);
-  if (c != undefined) {
+  if (c && c.login) {
+    console.log(c);
     if (sessions[c.login.username] != undefined && 
       sessions[c.login.username].id == c.login.sessionID) {
       next();
@@ -65,6 +65,7 @@ function authenticate(req, res, next) {
     res.redirect('/index.html');
   }
 }
+
 
 app.use('/app/*', authenticate);
 
