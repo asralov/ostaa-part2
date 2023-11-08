@@ -15,33 +15,33 @@ body{
 	-moz-animation: 20s linear 0s normal none infinite animate;
 	-ms-animation: 20s linear 0s normal none infinite animate;
 	-o-animation: 20s linear 0s normal none infinite animate;
-	animation: 20s linear 0s normal none infinite animate;
+	animation: 50s linear 0s normal none infinite animate;
 }
 
 /*--------------------Animated Background-----------------------*/
 @-webkit-keyframes animate {
 	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+	to {background-position: 0 100vh;}
 }
  
 @-moz-keyframes animate {
 	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+	to {background-position: 0 100vh;}
 }
  
 @-ms-keyframes animate {
 	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+	to {background-position: 0 100vh}
 }
  
 @-o-keyframes animate {
 	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+	to {background-position: 0 100vh;}
 }
  
 @keyframes animate {
 	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+	to {background-position: 0 100vh;}
 }
 
 
@@ -95,7 +95,6 @@ body{
     border: none;
     margin-bottom: 15px;
     font-family: 'Roboto Slab', serif;
-    padding-left: 4%;
 
 }
 
