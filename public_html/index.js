@@ -1,5 +1,4 @@
 
-isLoginPage = true;
 
 // need to have a function to return a create account
 const box = document.getElementById("mainBox");
@@ -20,9 +19,8 @@ function getCreateLogPage(){
     btn.innerHTML = `<button onclick="loginUser();" id="userLogButton">Log In</button>`;
     title.innerHTML = `Log In`
     promt.innerHTML = `<span id="promt">Do not have an account?<button onclick="getCreateAccPage()" id="createAcc">Sign Up</button></span>`;
-    /*
     document.getElementById("user").value = "";
-    document.getElementById("password").value = "";*/
+    document.getElementById("password").value = "";
 }
 
 function loginUser() {
@@ -43,7 +41,7 @@ function loginUser() {
       alert(text);
       window.location.href = '/app/home.html';
     } else {
-      alert('failed');
+      alert('FAILED');
     }
   });
 }
@@ -68,7 +66,7 @@ function addUser() {
       document.getElementById("createMessage").style.color = "Red";
     } else if (text == "USER SUCCESSFULLY SAVED") {
       document.getElementById("createMessage").style.color = "Green";
-      setInterval(getCreateLogPage, 3000);
+      //setInterval(getCreateLogPage, 3000);
     }
   }).catch((err) => {
     console.log("yiker" + err);
@@ -76,5 +74,8 @@ function addUser() {
 }
 
 
-
-
+/*----------------Main Page Section------------- */
+let user = document.getElementById('user').value;
+let message = `Welcome ${user}! What would you like to do?`
+let greetingBox = document.getElementById("userGreetings");
+greetingBox.innerHTML = message;
