@@ -20,8 +20,9 @@ function getCreateLogPage(){
     btn.innerHTML = `<button onclick="loginUser();" id="userLogButton">Log In</button>`;
     title.innerHTML = `Log In`
     promt.innerHTML = `<span id="promt">Do not have an account?<button onclick="getCreateAccPage()" id="createAcc">Sign Up</button></span>`;
+    /*
     document.getElementById("user").value = "";
-    document.getElementById("password").value = "";
+    document.getElementById("password").value = "";*/
 }
 
 function loginUser() {
@@ -73,4 +74,7 @@ function addUser() {
     console.log("yiker" + err);
   });
 }
+
+
+
 

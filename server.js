@@ -35,8 +35,8 @@ function removeSessions() {
   let usernames = Object.keys(sessions);
   for (let i = 0; i < usernames.length; i++) {
     let last = sessions[usernames[i]].time;
-    //if (last + 120000 < now) {
-    if (last + 10000 * 5 < now) {
+    //if (last + 120000 < now) { did 10000, i changed to be 99999
+    if (last + 99999 * 5 < now) {
       delete sessions[usernames[i]];
     }
   }
