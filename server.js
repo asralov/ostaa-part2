@@ -54,7 +54,6 @@ function authenticate(req, res, next) {
   console.log('auth request:');
   console.log(req.cookies);
   if (c && c.login) {
-    console.log(c);
     if (sessions[c.login.username] != undefined && 
       sessions[c.login.username].id == c.login.sessionID) {
       next();
