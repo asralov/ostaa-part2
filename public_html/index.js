@@ -25,8 +25,8 @@ function getCreateLogPage(){
 
 function loginUser() {
   console.log('yes');
-  let us = document.getElementById('user').value;
-  let pw = document.getElementById('password').value;
+  let us = document.getElementById('user').value.trim();
+  let pw = document.getElementById('password').value.trim();
   let data = {username: us, password: pw};
   let p = fetch( '/account/login/', {
     method: 'POST', 
@@ -75,7 +75,26 @@ function addUser() {
 
 
 /*----------------Main Page Section------------- */
-let user = document.getElementById('user').value;
-let message = `Welcome ${user}! What would you like to do?`
-let greetingBox = document.getElementById("userGreetings");
-greetingBox.innerHTML = message;
+
+
+/*
+if (window.location.href.includes('home.html')) {
+  // Code to execute when the second HTML page is loaded
+  window.addEventListener('load', ()=>{
+    let user = document.getElementById('user').value;
+    let message = `Welcome ${user}! What would you like to do?`;
+    let greetingBox = document.getElementById("userGreetings");
+    greetingBox.innerText = message;
+  });
+}
+*/
+
+function showGreeting(){
+  let user = document.getElementById('user').value;
+  let message = `Welcome ${user}! What would you like to do?`;
+  let greetingBox = document.getElementById("userGreetings");
+  console.log(message);
+  greetingBox.innerHTML = `<p>${message}</p>`;
+}
+
+window.addEventListener('load', showGreeting);
