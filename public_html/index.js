@@ -89,3 +89,9 @@ function returnUser(){
   let messageParagraph = greetingBox.querySelector("h3");
   messageParagraph.textContent= message;
 }
+
+
+const redirectBtn = document.getElementById("postItem");
+redirectBtn.addEventListener('click', ()=> {
+  window.location.href = '/app/post.html';
+})
