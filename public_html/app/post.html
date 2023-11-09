@@ -30,19 +30,20 @@
             <span>Price</span>
             <input type="number" id="priceItem" pattern="[0-9]">
         </div>
-        <div id="statusItemBox">
+        <!-- <div id="statusItemBox">
             <span>Status</span>
             <input type="text" id="statusItem">
-        </div>
+        </div> -->
         <div id="imageItemBox"> 
             <label for="imageItem" class="btn btn-primary btn-block btn-outlined">Select an Image for Your Item</label>
             <input type="file" id="imageItem" accept="image/*" style="display: none">
         </div>
         <div id="addItemButtonBox">
-            <button onclick="addItem();" id="addItemButton">
+            <button onclick="createListing();" id="addItemButton">
                 Add Item
             </button>
         </div>
     </div>
+    <script src="../index.js"></script>
 </body>
 </html>
