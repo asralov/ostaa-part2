@@ -87,7 +87,7 @@ var User = mongoose.model('User', userSchema );
 var itemSchema = new Schema({
   title: String,
   description: String,
-  image: String,
+  // image: String,
   price: Number,
   stat: String,
   user: String
@@ -136,17 +136,17 @@ app.post('/account/login', (req, res) => {
 app.post('/add/item', (req, res) => {
   let title = req.body.title;
   let desc = req.body.desc;
-  let image = req.body.image;
+  // let image = req.body.image;
   let price = req.body.price; 
   let status = req.body.status;
   let userItem = req.body.userItem;
-
+  console.log("yes");
   // return the list of all users containing the user in the request
   let p = User.find({username: userItem}).exec();
   p.then((contents) => {
     // checks if the username exists in the database
     if (contents.length != 0) {
-      let item = new Item({title: title, description: desc, image: image, price: price, stat: status, user: userItem});
+      let item = new Item({title: title, description: desc, price: price, stat: status, user: userItem});
       item.save()
       // Pushes the item to the listings array
       .then((savedItem) => {
