@@ -154,13 +154,19 @@ function viewPurchasesOfAUser() {
  */
 function showListings(text) {
   let user = localStorage.getItem("user");
-  let listings = ""
+  let listings = ""   //'<p>' + text[i].image + '</p>' +
     for (let i = 0; i < text.length; i++) {
       let itemID = text[i]._id;
-      let listing = "<div class='listing'>"+'<p>' + text[i].title + '</p>' +
-                    // '<p>' + text[i].image + '</p>' +
+      /*
+      let listing = "<div class='listing'>"+'<h1>' + text[i].title + '</h1>' +
+                    '<img src="../images/background.png">'                         
                     '<p>' + text[i].description+'</p>' +
-                    '<p>' +text[i].price + '</p>' ;
+                    '<p>' +text[i].price + '</p>' ;*/
+      let listing = `<div class="listingBox">
+                      <h1>${text[i].title}</h1>
+                      <img src="../images/background.png">
+                      <p>${text[i].desc}</p>
+                      <p>${text[i].price}</p>`
       if (text[i].stat == "SALE" && text[i].user != user) {
         listing += '<button id="'+ itemID +'" onclick="purchaseListing(\''+itemID+'\');">Buy Now!</button>' +  '</div>'
       } else if (text[i].stat == "SOLD") {
