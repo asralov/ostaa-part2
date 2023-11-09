@@ -36,7 +36,8 @@ function removeSessions() {
   for (let i = 0; i < usernames.length; i++) {
     let last = sessions[usernames[i]].time;
     //if (last + 120000 < now) { did 10000, i changed to be 99999
-    if (last + 99999 * 5 < now) {
+    if (last +60000 * 5 < now) {
+      console.log("yes");
       delete sessions[usernames[i]];
     }
   }
@@ -126,7 +127,7 @@ app.post('/account/login', (req, res) => {
       let sid = addSession(u.username);  
       res.cookie("login", 
         {username: u.username, sessionID: sid}, 
-        {maxAge: 60000 * 2 });
+        {maxAge: 60000 * 5 });
       res.end('SUCCESS');
     }
   });
