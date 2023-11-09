@@ -146,7 +146,7 @@ app.post('/add/item', (req, res) => {
   p.then((contents) => {
     // checks if the username exists in the database
     if (contents.length != 0) {
-      let item = new Item({title: title, description: desc, image: image, price: price, status: status, user: userItem});
+      let item = new Item({title: title, description: desc, image: image, price: price, stat: status, user: userItem});
       item.save()
       // Pushes the item to the listings array
       .then((savedItem) => {
