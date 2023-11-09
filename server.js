@@ -23,13 +23,15 @@ db.on('error', () => { console.log('MongoDB connection error:') });
 // -----------------Sessions Section----------------- //
 let sessions = {};
 
+// Adds a session when a user logs in
 function addSession(username) {
   let sid = Math.floor(Math.random() * 1000000000);
   let now = Date.now();
   sessions[username] = {id: sid, time: now};
   return sid;
 }
-
+// get called every 2 seconds. Checks if the session is expired and 
+// deletes the session if it is
 function removeSessions() {
   let now = Date.now();
   let usernames = Object.keys(sessions);
@@ -49,6 +51,8 @@ setInterval(removeSessions, 2000);
 app.use(cookieParser());    
 app.use(express.json());
 
+// Gets called every time a user opens a webpage in folder "app"
+// checks if the session exists. If not, redirects to log in page
 function authenticate(req, res, next) {
   let c = req.cookies;
   console.log('auth request:');
@@ -164,15 +168,18 @@ app.post('/add/item', (req, res) => {
 });
 
 // GET method. Changes the status of the item to SOLD
+// and adds the listing to the user's purchased array
 app.get('/purchase/listing/:user/:itemId', (req, res) => {
   var user = req.params.user;
   var itemID = req.params.itemId;
   Item.find({_id: itemID}).exec()
   .then((listings) => {
+    // Checks if the listing exists
     if (listings.length != 0) {
       var listing = listings[0]
       User.find({username: user}).exec()
       .then((users) => {
+        //Checks if the user exists
         if (users.length != 0) {
           if (listing.stat == "SOLD") {
             res.end("ITEM ALREADY SOLD");

@@ -1,20 +1,24 @@
-
-
 // need to have a function to return a create account
 const box = document.getElementById("mainBox");
 const btn = document.getElementById("userLogButtonBox");
 const title = document.getElementById("logTitle");
 const promt = document.getElementById("promt");
+
+/**
+ * This function changes the HTML for creating a new user.
+ * Gets called when a user presses "Do not have an account?" button
+ */
 function getCreateAccPage(){
     btn.innerHTML = `<button onclick="addUser();" id="userAddButton">Create Account</button>`;
     title.innerHTML = `Create Account`
     promt.innerHTML = `<span id="promt">Already got an account?<button onclick="getCreateLogPage()" id="createAcc">Log in</button></span>`;
     document.getElementById("user").value = "";
-    document.getElementById("password").value = "";
-
-    
+    document.getElementById("password").value = "";    
 }
-
+/**
+ * This function changes the HTML for logging an existing user.
+ * Gets called when a user presses the "Already got an account"? button
+ */
 function getCreateLogPage(){
     btn.innerHTML = `<button onclick="loginUser();" id="userLogButton">Log In</button>`;
     title.innerHTML = `Log In`
@@ -23,6 +27,11 @@ function getCreateLogPage(){
     document.getElementById("password").value = "";
 }
 
+/**
+ * This function get called whenever a user presses the log in button.
+ * Sends POST request to the server. If successful, sends the user to 
+ * the homepage
+ */
 function loginUser() {
   console.log('yes');
   let us = document.getElementById('user').value;
@@ -78,6 +87,10 @@ function addUser() {
 /*----------------Main Page Section------------- */
 window.onload = returnUser;
 
+/**
+ * this function displays the welcome text with the user's
+ * username
+ */
 function returnUser(){
   let user = localStorage.getItem("user");
   let message = `Welcome ${user}! What would you like to do?`;
@@ -86,12 +99,15 @@ function returnUser(){
   messageParagraph.textContent= message;
 }
 
-
 const redirectBtn = document.getElementById("postItem");
 redirectBtn.addEventListener('click', ()=> {
   window.location.href = '/app/post.html';
 })
-
+/**
+ * this function gets called whenever a user searches for a listing
+ * Sends a GET request to the server and gets all listgins with the given
+ * keyword
+ */
 function viewListings() {
   let item = document.getElementById("item").value;
   let p = fetch('/search/items/'+item);
@@ -101,7 +117,11 @@ function viewListings() {
     showListings(text);
   })
 }
-
+/**
+ * This function gets called whenever the user views all of their 
+ * listings. Sends a get request to the server and calls a helper function
+ * that shows all of the listing
+ */
 function viewListingsOfAUser() {
   let user = localStorage.getItem("user");
   let p = fetch('/get/listings/' + user);
@@ -111,7 +131,11 @@ function viewListingsOfAUser() {
     showListings(text);
   })
 }
-
+/**
+ * This function gets called whenver the user views all of their
+ * purchases.Sends a get request to the server and calls a helper function
+ * that shows all of the listing
+ */
 function viewPurchasesOfAUser() {
   let user = localStorage.getItem("user");
   let p = fetch('/get/purchases/' + user);
@@ -122,6 +146,12 @@ function viewPurchasesOfAUser() {
   })
 }
 
+/**
+ * 
+ * @param {*} text text is the list of all listings/purchases
+ * This is a helper function that gets called inside viewListingsOfAUser()
+ * and viewPurchasesOfAUser(). Creates an HTML block and shows it to the user
+ */
 function showListings(text) {
   let user = localStorage.getItem("user");
   let listings = ""
@@ -140,7 +170,12 @@ function showListings(text) {
     }
     document.getElementById("itemSection").innerHTML = listings;
 }
-
+/**
+ * 
+ * @param {*} itemID is the id of an item
+ * This function gets called whenever the user presses the Buy now button.
+ * Sends a GET request to the database and refereshes the listings after the purchase
+ */
 function purchaseListing(itemID) {
   let user = localStorage.getItem("user");
   let p = fetch('/purchase/listing/'+user+'/'+itemID);
@@ -154,7 +189,11 @@ function purchaseListing(itemID) {
 
 
 /*----------------post Section------------- */
-// Not finished
+/**
+ * This function gets called when a user presses the "Add item" button.
+ * Sends a POST request to the server which saves the listing. Redirects the
+ * user back to the home page
+ */
 function createListing() {
   var title = document.getElementById("itemTitle").value;
   var desc = document.getElementById("descItem").value;
