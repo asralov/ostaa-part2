@@ -91,3 +91,21 @@ const redirectBtn = document.getElementById("postItem");
 redirectBtn.addEventListener('click', ()=> {
   window.location.href = '/app/post.html';
 })
+
+function viewListings() {
+  let item = document.getElementById("item").value;
+  let p = fetch('/search/items/'+item);
+  p.then((response) => {
+    return response.json();
+  }).then((text) => {
+    let listings = ""
+    for (let i = 0; i < text.length; i++) {
+      let listing = "<div class='listing'>"+'<p>' + text[i].title + '</p>' +
+                    '<p>' + text[i].image + '</p>' +'<p>' + text[i].description+'</p>' +
+                    '<p>' +text[i].price + '</p>' +  '</div>';
+      listings += listing;
+    }
+    document.getElementById("itemSection").innerHTML = listings;
+
+  })
+}
