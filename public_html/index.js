@@ -98,7 +98,22 @@ function viewListings() {
   p.then((response) => {
     return response.json();
   }).then((text) => {
-    let listings = ""
+    showListings(text);
+  })
+}
+
+function viewListingsOfAUser() {
+  let user = localStorage.getItem("user");
+  let p = fetch('/get/listings/' + user);
+  p.then((response) => {
+    return response.json();
+  }).then((text) => {
+    showListings(text);
+  })
+}
+
+function showListings(text) {
+  let listings = ""
     for (let i = 0; i < text.length; i++) {
       let listing = "<div class='listing'>"+'<p>' + text[i].title + '</p>' +
                     '<p>' + text[i].image + '</p>' +'<p>' + text[i].description+'</p>' +
@@ -106,6 +121,4 @@ function viewListings() {
       listings += listing;
     }
     document.getElementById("itemSection").innerHTML = listings;
-
-  })
 }
