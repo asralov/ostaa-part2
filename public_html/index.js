@@ -126,7 +126,8 @@ function showListings(text) {
   let listings = ""
     for (let i = 0; i < text.length; i++) {
       let listing = "<div class='listing'>"+'<p>' + text[i].title + '</p>' +
-                    '<p>' + text[i].image + '</p>' +'<p>' + text[i].description+'</p>' +
+                    // '<p>' + text[i].image + '</p>' +
+                    '<p>' + text[i].description+'</p>' +
                     '<p>' +text[i].price + '</p>' +  '</div>';
       listings += listing;
     }
@@ -140,21 +141,22 @@ function createListing() {
   var title = document.getElementById("itemTitle").value;
   var desc = document.getElementById("descItem").value;
   var price = document.getElementById("priceItem").value;
-  var status = document.getElementById("statusItem").value;
   var userItem = localStorage.getItem("user");
   // Alert the user if any of the entries is blank
-  if (title == "" || desc == "" || price == "" || status == "" || userItem == "") {
+  if (title == "" || desc == "" || price == "" || userItem == "") {
       window.alert("Please fill out all the information")
   } else {
-      let info = {title: title, desc: desc, price: price, status: status, userItem: userItem}
+      let info = {title: title, desc: desc, price: price, userItem: userItem}
       // send to the server using POST method
-      let p = fetch('add/item', {
+      let p = fetch('/add/item', {
           method: 'POST',
           body: JSON.stringify(info),
           headers: { 'Content-Type': 'application/json'}
       });
       p.then((response) => {
-        window.alert(response);
+        return response.text();
+      }).then((text) => {
+        window.alert(text);
         window.location.href = '/app/home.html';
       }).catch((err) => {
           console.log(err);

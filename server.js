@@ -138,15 +138,13 @@ app.post('/add/item', (req, res) => {
   let desc = req.body.desc;
   // let image = req.body.image;
   let price = req.body.price; 
-  let status = req.body.status;
   let userItem = req.body.userItem;
-  console.log("yes");
   // return the list of all users containing the user in the request
   let p = User.find({username: userItem}).exec();
   p.then((contents) => {
     // checks if the username exists in the database
     if (contents.length != 0) {
-      let item = new Item({title: title, description: desc, price: price, stat: status, user: userItem});
+      let item = new Item({title: title, description: desc, price: price, stat: "SALE", user: userItem});
       item.save()
       // Pushes the item to the listings array
       .then((savedItem) => {
