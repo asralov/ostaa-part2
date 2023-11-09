@@ -132,3 +132,32 @@ function showListings(text) {
     }
     document.getElementById("itemSection").innerHTML = listings;
 }
+
+
+/*----------------post Section------------- */
+// Not finished
+function createListing() {
+  var title = document.getElementById("itemTitle").value;
+  var desc = document.getElementById("descItem").value;
+  var price = document.getElementById("priceItem").value;
+  var status = document.getElementById("statusItem").value;
+  var userItem = localStorage.getItem("user");
+  // Alert the user if any of the entries is blank
+  if (title == "" || desc == "" || price == "" || status == "" || userItem == "") {
+      window.alert("Please fill out all the information")
+  } else {
+      let info = {title: title, desc: desc, price: price, status: status, userItem: userItem}
+      // send to the server using POST method
+      let p = fetch('add/item', {
+          method: 'POST',
+          body: JSON.stringify(info),
+          headers: { 'Content-Type': 'application/json'}
+      });
+      p.then((response) => {
+        window.alert(response);
+        window.location.href = '/app/home.html';
+      }).catch((err) => {
+          console.log(err);
+      });
+  }
+}
