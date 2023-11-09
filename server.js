@@ -161,7 +161,33 @@ app.post('/add/item', (req, res) => {
   })
 });
 
-
+app.get('/purchase/listing/:user/:itemId', (req, res) => {
+  var user = req.params.user;
+  var itemID = req.params.itemId;
+  Item.find({_id: itemID}).exec()
+  .then((listings) => {
+    if (listings.length != 0) {
+      var listing = listings[0]
+      User.find({username: user}).exec()
+      .then((users) => {
+        if (users.length != 0) {
+          if (listing.stat == "SOLD") {
+            res.end("ITEM ALREADY SOLD");
+          }
+          listing.stat = "SOLD";
+          listing.save();
+          users[0].purchases.push(listing);
+          users[0].save();
+          res.end("SOLD!");
+        } else {
+          res.end("COULD NOT FIND USER");
+        }
+      });
+    } else {
+      res.end("COULD NOT FIND LISTING");
+    }
+  });
+});
 
 // GET method. Returns the json file containing all the users
 app.get('/get/users', function (req, res) {

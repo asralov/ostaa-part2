@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 
 // need to have a function to return a create account
@@ -123,15 +124,33 @@ function viewPurchasesOfAUser() {
 }
 
 function showListings(text) {
+  let user = localStorage.getItem("user");
   let listings = ""
     for (let i = 0; i < text.length; i++) {
+      let itemID = text[i]._id;
       let listing = "<div class='listing'>"+'<p>' + text[i].title + '</p>' +
                     // '<p>' + text[i].image + '</p>' +
                     '<p>' + text[i].description+'</p>' +
-                    '<p>' +text[i].price + '</p>' +  '</div>';
+                    '<p>' +text[i].price + '</p>' ;
+      if (text[i].stat == "SALE" && text[i].user != user) {
+        listing += '<button id="'+ itemID +'" onclick="purchaseListing(\''+itemID+'\');">Buy Now!</button>' +  '</div>'
+      } else if (text[i].stat == "SOLD") {
+        listing += '<p>Sold!</p>' + '</div>'
+      }
       listings += listing;
     }
     document.getElementById("itemSection").innerHTML = listings;
+}
+
+function purchaseListing(itemID) {
+  let user = localStorage.getItem("user");
+  let p = fetch('/purchase/listing/'+user+'/'+itemID);
+  p.then((response) => {
+    return response.text();
+  }).then((text) => {
+    window.alert(text);
+    viewListings();
+  })
 }
 
 
