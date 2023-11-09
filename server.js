@@ -37,7 +37,6 @@ function removeSessions() {
     let last = sessions[usernames[i]].time;
     //if (last + 120000 < now) { did 10000, i changed to be 99999
     if (last +60000 * 5 < now) {
-      console.log("yes");
       delete sessions[usernames[i]];
     }
   }
@@ -117,14 +116,17 @@ app.get('/add/user/:user/:pass', (req, res) => {
   })
   
 });
+// POST method. Logs the user into the website.
 app.post('/account/login', (req, res) => { 
   let u = req.body;
+  // Checks if the user is in the database
   let p1 = User.find({username: u.username, password: u.password}).exec();
   p1.then( (results) => { 
     if (results.length == 0) {
       res.end('Coult not find account');
     } else {
       let sid = addSession(u.username);  
+      // Creates a cookie with 
       res.cookie("login", 
         {username: u.username, sessionID: sid}, 
         {maxAge: 60000 * 5 });
@@ -161,6 +163,7 @@ app.post('/add/item', (req, res) => {
   })
 });
 
+// GET method. Changes the status of the item to SOLD
 app.get('/purchase/listing/:user/:itemId', (req, res) => {
   var user = req.params.user;
   var itemID = req.params.itemId;
