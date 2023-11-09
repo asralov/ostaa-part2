@@ -154,7 +154,7 @@ body{
 /*-----------------Home Page CSS-----------------*/
 #mainBody{
     background: url('./images/background-home.jpg') repeat 0 0;
-    animation: 180s linear 0s normal none infinite animate;
+    animation: 60s linear 0s normal none infinite animate;
 }
 
 #titleSection{
@@ -182,4 +182,38 @@ body{
     height: 90.5%;
     width: 50%;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+#userGreetings{
+    color: #fff;
+}
+
+#userSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 5%;
+}
+
+.mainPageButton{
+    border:none;
+    color:rgb(189, 0, 0);
+    border-radius: 10px 10px 10px 10px;
+    transition: 0.3s ease-out;
+}
+
+.mainPageButton:hover{
+    color: #fff;
+    background-color: rgb(189, 0, 0);
+    border:none;
+    cursor: pointer;
+}
+#searchButton{
+    border-radius: 0 10px 10px 0 !important;
+}
+
+#item{
+    border:none;
+    border-radius: 10px 0 0 10px;
 }

@@ -1,5 +1,5 @@
 
-
+let user;
 // need to have a function to return a create account
 const box = document.getElementById("mainBox");
 const btn = document.getElementById("userLogButtonBox");
@@ -25,8 +25,9 @@ function getCreateLogPage(){
 
 function loginUser() {
   console.log('yes');
-  let us = document.getElementById('user').value.trim();
-  let pw = document.getElementById('password').value.trim();
+  let us = document.getElementById('user').value;
+  localStorage.setItem("user", us)
+  let pw = document.getElementById('password').value;
   let data = {username: us, password: pw};
   let p = fetch( '/account/login/', {
     method: 'POST', 
@@ -77,24 +78,14 @@ function addUser() {
 /*----------------Main Page Section------------- */
 
 
-/*
-if (window.location.href.includes('home.html')) {
-  // Code to execute when the second HTML page is loaded
-  window.addEventListener('load', ()=>{
-    let user = document.getElementById('user').value;
-    let message = `Welcome ${user}! What would you like to do?`;
-    let greetingBox = document.getElementById("userGreetings");
-    greetingBox.innerText = message;
-  });
-}
-*/
 
-function showGreeting(){
-  let user = document.getElementById('user').value;
+
+window.onload = returnUser;
+
+function returnUser(){
+  let user = localStorage.getItem("user");
   let message = `Welcome ${user}! What would you like to do?`;
   let greetingBox = document.getElementById("userGreetings");
-  console.log(message);
-  greetingBox.innerHTML = `<p>${message}</p>`;
+  let messageParagraph = greetingBox.querySelector("h3");
+  messageParagraph.textContent= message;
 }
-
-window.addEventListener('load', showGreeting);
