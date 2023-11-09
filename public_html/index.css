@@ -119,6 +119,8 @@ body{
 #postBody{
     background: url('./images/background-post.jpg') repeat 0 0;
     animation: 60s linear 0s normal none infinite animate;
+    color: #fff;
+    filter: brightness(100%);
 }
 
 
@@ -129,27 +131,31 @@ body{
     align-items: center;
     justify-content: center;
 }
-/*
-#postMainBox{
-    background-color: rgba(255, 255, 255, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 10%;  
-}
+
+
 #addPostBox{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}*/
+    transform: translate(0, -10%);
+}
+
+#addPostTitle{
+    transform: translate(-15%, 0);
+}
 #imageItem{
     color: rgba(0, 0, 0, 0);
 }
 
-#imageItemBox{
-    transform: translate(57%, 0);
+#itemTitleBox, #descItemBox, #priceItemBox, 
+#statusItemBox, #imageItemBox {
+    margin-bottom: 5%;
 }
+
+#itemTitle, #descItem, #priceItem, 
+#statusItem, #addItemButton{
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+    color: green;
+}
+
 #postBody{
     display: flex;
     flex-direction: column;
@@ -159,7 +165,9 @@ body{
     align-content: center;
     text-align: right;
 }
-
+#imageItem{
+    filter: grayscale(100%) brightness(200%);
+}
 
 /*-----------------Home Page CSS-----------------*/
 #mainBody{

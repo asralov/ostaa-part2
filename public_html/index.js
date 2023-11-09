@@ -1,5 +1,5 @@
 
-let user;
+
 // need to have a function to return a create account
 const box = document.getElementById("mainBox");
 const btn = document.getElementById("userLogButtonBox");
@@ -76,10 +76,6 @@ function addUser() {
 
 
 /*----------------Main Page Section------------- */
-
-
-
-
 window.onload = returnUser;
 
 function returnUser(){
