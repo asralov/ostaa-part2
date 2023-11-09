@@ -112,6 +112,16 @@ function viewListingsOfAUser() {
   })
 }
 
+function viewPurchasesOfAUser() {
+  let user = localStorage.getItem("user");
+  let p = fetch('/get/purchases/' + user);
+  p.then((response) => {
+    return response.json();
+  }).then((text) => {
+    showListings(text);
+  })
+}
+
 function showListings(text) {
   let listings = ""
     for (let i = 0; i < text.length; i++) {
