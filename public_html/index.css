@@ -190,30 +190,37 @@ body{
 #userSection{
     position: fixed;
     left: 0;
-    top: 9.5%;
-    height: 90.5%;
+    top: 7.6%;
+    height: 92.4%;
     width: 50%;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 #itemSection{
     position: fixed;
+
     left: 50%;
-    top: 9.5%;
-    height: 90.5%;
+    top: 7.6%;
+    bottom: 0;
     width: 50%;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
-    display: flex;
-    overflow: auto;
+    display: block;
+    overflow: scroll;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+.itemImg{
+    width: 40%;
+    object-fit: cover;
 }
 
 .listingBox{
     color: #fff;
-    margin-bottom: 5%;
+    
 }
 
 #userGreetings{
