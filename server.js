@@ -12,7 +12,24 @@ const bp = require('body-parser')
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const app = express();
+// to store pictures and show them to the user by getting their pics uploaded to the server
+const multer = require('multer')
 const port = 80;
+
+// Add this line to your server setup
+app.use('/uploads', express.static('uploads'));
+
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    return cb(null, "./uploads")
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({storage})
 
 // Seeting up the database using mongoose and mongoDB
 const db  = mongoose.connection;
@@ -91,7 +108,7 @@ var User = mongoose.model('User', userSchema );
 var itemSchema = new Schema({
   title: String,
   description: String,
-  // image: String,
+  image: String,
   price: Number,
   stat: String,
   user: String
@@ -140,7 +157,9 @@ app.post('/account/login', (req, res) => {
 });
 
 // POST method. Adds a new item to the databse
-app.post('/add/item', (req, res) => {
+app.post('/add/item', upload.single("image"), (req, res) => {
+  console.log(req.file);
+  console.log(req.body);
   let title = req.body.title;
   let desc = req.body.desc;
   // let image = req.body.image;
@@ -151,7 +170,7 @@ app.post('/add/item', (req, res) => {
   p.then((contents) => {
     // checks if the username exists in the database
     if (contents.length != 0) {
-      let item = new Item({title: title, description: desc, price: price, stat: "SALE", user: userItem});
+      let item = new Item({title: title, description: desc, image:"/uploads/"+req.file.filename, price: price, stat: "SALE", user: userItem});
       item.save()
       // Pushes the item to the listings array
       .then((savedItem) => {
