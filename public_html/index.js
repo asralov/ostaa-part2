@@ -1,3 +1,9 @@
+/**
+ * Class: CS 337
+ * Author: Pulat Uralov and Abrorjon Asralov
+ * Description: This file controls user side
+ */
+
 // need to have a function to return a create account
 const box = document.getElementById("mainBox");
 const btn = document.getElementById("userLogButtonBox");
@@ -153,15 +159,17 @@ function viewPurchasesOfAUser() {
  * and viewPurchasesOfAUser(). Creates an HTML block and shows it to the user
  */
 function showListings(text) {
+  console.log("hey");
   let user = localStorage.getItem("user");
   let listings = ""   //'<p>' + text[i].image + '</p>' +
     for (let i = 0; i < text.length; i++) {
       let itemID = text[i]._id;
+      console.log(text[i].image);
       let listing = `<div class="listingBox">
                       <h1>${text[i].title}</h1>
-                      <img src="../images/background.png">
-                      <p>${text[i].desc}</p>
-                      <p>${text[i].price}</p>`
+                      <img class="itemImg" src="${text[i].image}">
+                      <p>${text[i].description}</p>
+                      <p>$${text[i].price}</p>`
       if (text[i].stat == "SALE" && text[i].user != user) {
         listing += '<button id="'+ itemID +'"class="buyBtn" onclick="purchaseListing(\''+itemID+'\');">Buy Now!</button>' +  '</div>'
       } else if (text[i].stat == "SOLD") {
@@ -199,25 +207,34 @@ function createListing() {
   var title = document.getElementById("itemTitle").value;
   var desc = document.getElementById("descItem").value;
   var price = document.getElementById("priceItem").value;
+  var imgs = document.getElementById("imageItem");
+  var img = imgs.files[0];
   var userItem = localStorage.getItem("user");
+
   // Alert the user if any of the entries is blank
-  if (title == "" || desc == "" || price == "" || userItem == "") {
-      window.alert("Please fill out all the information")
+  if (title == "" || desc == "" || price == "" || userItem == "" || img == "") {
+    window.alert("Please fill out all the information");
   } else {
-      let info = {title: title, desc: desc, price: price, userItem: userItem}
-      // send to the server using POST method
-      let p = fetch('/add/item', {
-          method: 'POST',
-          body: JSON.stringify(info),
-          headers: { 'Content-Type': 'application/json'}
-      });
-      p.then((response) => {
-        return response.text();
-      }).then((text) => {
-        window.alert(text);
-        window.location.href = '/app/home.html';
-      }).catch((err) => {
-          console.log(err);
-      });
+    let formData = new FormData();
+    formData.append("title", title);
+    formData.append("desc", desc);
+    formData.append("price", price);
+    formData.append("userItem", userItem);
+    formData.append("image", img);
+
+    // send to the server using POST method
+    let p = fetch('/add/item', {
+      method: 'POST',
+      body: formData,
+    });
+
+    p.then((response) => {
+      return response.text();
+    }).then((text) => {
+      window.alert(text);
+      window.location.href = '/app/home.html';
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 }
