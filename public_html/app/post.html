@@ -1,3 +1,6 @@
+<!--Class: CS 337
+    Author: Pulat Uralov and Abrorjon Asralov
+    Description: this is the post page HTML-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,15 +33,11 @@
             <span>Price</span>
             <input type="number" id="priceItem" pattern="[0-9]">
         </div>
-        <!-- <div id="statusItemBox">
-            <span>Status</span>
-            <input type="text" id="statusItem">
-        </div> -->
         <div id="imageItemBox"> 
             <label for="imageItem" class="btn btn-primary btn-block btn-outlined">Select an Image for Your Item</label>
-            <input type="file" id="imageItem" accept="image/*" style="display: none">
+            <input type="file" id="imageItem" accept="image/*" style="display: none" name="image">
         </div>
-        <div id="addItemButtonBox">
+         <div id="addItemButtonBox">
             <button onclick="createListing();" id="addItemButton">
                 Add Item
             </button>
